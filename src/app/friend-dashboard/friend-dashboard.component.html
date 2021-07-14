@@ -1,0 +1,97 @@
+<nav class="navbar navbar-light bg-dark">
+  <div class="container-fluid">
+    <h1 class="friendH1">Friend list - Angular CRUD</h1>
+    <div class="d-flex">
+      <button (click)="clickAddFriend()" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-success">Add friend</button>
+    </div>
+  </div>
+</nav>
+
+<table class="table mt-3">
+  <thead>
+  <tr>
+<!--    <th scope="col">Friend ID</th>-->
+    <th scope="col">First name</th>
+    <th scope="col">Last name</th>
+    <th scope="col">Email ID</th>
+    <th scope="col">Mobile No.</th>
+    <th scope="col">Favorite language</th>
+    <th scope="col">Edit/Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of friendData">
+<!--    <td>{{row.id}}</td>-->
+    <td>{{row.firstName}}</td>
+    <td>{{row.lastName}}</td>
+    <td>{{row.email}}</td>
+    <td>{{row.mobile}}</td>
+    <td>{{row.favoriteLanguage}}</td>
+    <td>
+      <button (click)="onEdit(row)" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info">Edit</button>
+      <button (click)="deleteFriend(row)" class="btn btn-danger mx-3">Delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<div>
+  <select [(ngModel)]="deptId" (change)="onDeptChange()">
+    <option value="0">select your language</option>
+    <option *ngFor="let dept of departments" value="{{dept.id}}">{{dept.name}}</option>
+  </select>
+  <button (click)="resetDept()">Rest Dept</button>
+  <p>{{deptId}}</p>
+
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Friend details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+<!--        we need a form control so that the value can bind to our input tags, for that we need to have a formGroup in our html and formValue as it's value-->
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">First Name</label>
+<!--            we need in input tag a formControl name-->
+            <input type="text" formControlName="firstName" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Last Name</label>
+            <input type="text" formControlName="lastName" class="form-control" id="exampleInputPassword1">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input type="email" formControlName="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Mobile No.</label>
+            <input type="text" formControlName="mobile" class="form-control" id="exampleInputPassword1">
+          </div>
+
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Favorite language</label>
+            <input type="text" formControlName="favoriteLanguage" class="form-control" id="exampleInputPassword1">
+          </div>
+
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+<!--        to hide the add button during update we need *ng-->
+        <button type="button" *ngIf="showAdd" (click)="postFriendDetails()" class="btn btn-primary">Add</button>
+        <!--      it should be update written when we edit and not add -->
+        <button type="button" *ngIf="showUpdate" (click)="updateFriendDetails()" class="btn btn-primary">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

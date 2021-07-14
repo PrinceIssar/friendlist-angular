@@ -1,0 +1,16 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "firstName": "princeissar@gmail.com",
+      "lastName": "issar",
+      "email": "efrfi@gmail.com",
+      "mobile": "+32222",
+      "favoriteLanguage": "java"
+    }
+  ],
+  "comments": [],
+  "profile": {
+    "name": "typicode"
+  }
+}
